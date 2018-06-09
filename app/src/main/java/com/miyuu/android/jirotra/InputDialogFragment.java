@@ -1,21 +1,23 @@
 package com.miyuu.android.jirotra;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class InputDialogFragment extends DialogFragment {
-    AlertDialog dialog;
-    AlertDialog.Builder builder;
+
 
     String selectCall;
     int call;
@@ -50,9 +52,15 @@ public class InputDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        Dialog dialog = new Dialog(getActivity());
+//        Dialog.Builder builder;
+
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        dialog.setContentView(R.layout.dialog_input);
         Bundle args = getArguments();
+
         String title = args.getString("title");
-        String message = args.getString("message");
         String[] callList;
         int callType = args.getInt("callType");
 
@@ -68,19 +76,18 @@ public class InputDialogFragment extends DialogFragment {
         }
 
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i =0;i<callList.length;i++){
+        for (int i = 0; i < callList.length; i++) {
             arrayList.add(callList[i]);
         }
 
+        Button positiveButton = dialog.findViewById(R.id.positive_button);
+        Button negativeButton = dialog.findViewById(R.id.negative_button);
+        TextView textView = dialog.findViewById(R.id.titleTextView);
+        textView.setText(title);
 
-        View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_input, null);
-        Button positiveButton = dialogView.findViewById(R.id.positive_button);
-        Button negativeButton = dialogView.findViewById(R.id.negative_button);
-
-        ListView listView = dialogView.findViewById(R.id.listVIew);
+        ListView listView = dialog.findViewById(R.id.listVIew);
         ListAdapter adapter = new ListAdapter(this.getActivity());
         adapter.setList(arrayList);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), R.layout.item_input, callList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -91,11 +98,6 @@ public class InputDialogFragment extends DialogFragment {
                 selectPosition = position;
             }
         });
-
-        builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(title);
-        builder.setMessage(message);
-
 
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,11 +115,24 @@ public class InputDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
-
-        builder.setView(dialogView);
-
-        dialog = builder.create();
-        dialog.show();
         return dialog;
+    }
+
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Dialog dialog = getDialog();
+
+        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int dialogWidth = (int) (metrics.widthPixels * 0.8);
+        int dialogHeight = (int) (metrics.heightPixels * 0.6);
+
+        lp.width = dialogWidth;
+        lp.height = dialogHeight;
+        dialog.getWindow().setAttributes(lp);
     }
 }
