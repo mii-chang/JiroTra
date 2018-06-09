@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,8 +16,12 @@ public class InputDialogFragment extends DialogFragment {
     AlertDialog dialog;
     AlertDialog.Builder builder;
 
+    String selectCall;
+    int call;
+    int selectPosition;
+
     public interface OnDialogButtonClickListener {
-        void onPositiveClick(String item);
+        void onPositiveClick(int callType, String item, int position);
 
         void onNegativeClick();
     }
@@ -49,12 +55,18 @@ public class InputDialogFragment extends DialogFragment {
         String[] callList;
         int callType = args.getInt("callType");
 
-        if (callType == 0) {
-            //麺
-            callList = args.getStringArray("menList");
-        } else {
-            callList = args.getStringArray("masiList");
+        switch (callType) {
+            case 0:
+                this.call = callType;
+                callList = args.getStringArray("menList");
+                break;
+            default:
+                this.call = callType;
+                callList = args.getStringArray("masiList");
+                break;
         }
+
+
         View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_input, null);
         Button positiveButton = dialogView.findViewById(R.id.positive_button);
         Button negativeButton = dialogView.findViewById(R.id.negative_button);
@@ -62,16 +74,25 @@ public class InputDialogFragment extends DialogFragment {
         ListView listView = dialogView.findViewById(R.id.listVIew);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, callList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ListView list = (ListView) parent;
+                Log.d("posi", position + "");
+                selectCall = (list.getItemAtPosition(position).toString());
+                selectPosition = position;
+            }
+        });
 
         builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         builder.setMessage(message);
 
+
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Listから選んだItemをListenerにわたす
-//                mListener.onPositiveClick(totalPrice);
+                mListener.onPositiveClick(call, selectCall, selectPosition);
                 dismiss();
             }
         });
