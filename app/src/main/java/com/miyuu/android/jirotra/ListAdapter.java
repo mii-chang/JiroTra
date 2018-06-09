@@ -13,13 +13,19 @@ import java.util.ArrayList;
 public class ListAdapter extends BaseAdapter {
     Context context;
     LayoutInflater layoutInflater = null;
+    int resourcedId;
+    String[] items;
     ArrayList<String> list;
     CheckBox checkBox;
     TextView itemText;
 
-    public ListAdapter(Context context) {
-        this.context = context;
+    public ListAdapter(Context context, int resourcedId, String[] items) {
+
         this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.resourcedId = resourcedId;
+        this.items = items;
+//        this.context = context;
+//        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public void setList(ArrayList<String> list) {
@@ -34,7 +40,7 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.item_input, parent, false);
+        convertView = layoutInflater.inflate(resourcedId, parent, false);
 
         itemText = convertView.findViewById(R.id.itemTextView);
         checkBox = convertView.findViewById(R.id.itemCheckBox);

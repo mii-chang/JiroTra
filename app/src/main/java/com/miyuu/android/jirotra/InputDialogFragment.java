@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class InputDialogFragment extends DialogFragment {
     String selectCall;
     int call;
     int selectPosition;
+    int nowPosition;
 
     public interface OnDialogButtonClickListener {
         void onPositiveClick(int callType, String item, int position);
@@ -85,14 +87,18 @@ public class InputDialogFragment extends DialogFragment {
         TextView textView = dialog.findViewById(R.id.titleTextView);
         textView.setText(title);
 
-        ListView listView = dialog.findViewById(R.id.listVIew);
-        ListAdapter adapter = new ListAdapter(this.getActivity());
-        adapter.setList(arrayList);
+        ListView listView = dialog.findViewById(R.id.listView);
+//        ListAdapter adapter = new ListAdapter(this.getActivity(), R.layout.item_input, callList);
+//        adapter.setList(arrayList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, callList);
         listView.setAdapter(adapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView list = (ListView) parent;
+//                CheckBox checkBox = parent.findViewById(R.id.itemCheckBox);
+//                checkBox.setChecked(true);
                 Log.d("posi", position + "");
                 selectCall = (list.getItemAtPosition(position).toString());
                 selectPosition = position;
