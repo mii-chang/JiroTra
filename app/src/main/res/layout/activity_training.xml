@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainingActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".TrainingActivity">
 
     <Button
         android:id="@+id/button"
@@ -22,15 +22,16 @@
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/udetate"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.22"/>
+
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="160dp"
-        android:layout_height="221dp"
+        android:layout_width="150dp"
+        android:layout_height="211dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"/>
 
     <TextView
         android:id="@+id/calTextView"
@@ -70,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/calTextView"/>
 
     <TextView
         android:id="@+id/udetate"
@@ -86,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hukkin" />
+        app:layout_constraintTop_toBottomOf="@+id/hukkin"/>
 
     <TextView
         android:id="@+id/hukkin"
@@ -101,7 +102,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jogingu" />
+        app:layout_constraintTop_toBottomOf="@+id/jogingu"/>
 
     <TextView
         android:id="@+id/jogingu"
@@ -109,12 +110,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="ジョギング 3km"
         android:textAlignment="center"
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"/>
 </android.support.constraint.ConstraintLayout>
