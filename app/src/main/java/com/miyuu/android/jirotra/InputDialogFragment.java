@@ -18,9 +18,10 @@ public class InputDialogFragment extends DialogFragment {
 
     String selectCall;
     int call;
+    int selectPosition;
 
     public interface OnDialogButtonClickListener {
-        void onPositiveClick(int callType, String item);
+        void onPositiveClick(int callType, String item, int position);
 
         void onNegativeClick();
     }
@@ -79,6 +80,7 @@ public class InputDialogFragment extends DialogFragment {
                 ListView list = (ListView) parent;
                 Log.d("posi", position + "");
                 selectCall = (list.getItemAtPosition(position).toString());
+                selectPosition = position;
             }
         });
 
@@ -90,7 +92,7 @@ public class InputDialogFragment extends DialogFragment {
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onPositiveClick(call, selectCall);
+                mListener.onPositiveClick(call, selectCall, selectPosition);
                 dismiss();
             }
         });

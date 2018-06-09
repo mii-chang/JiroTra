@@ -36,7 +36,7 @@ public class InputActivity extends AppCompatActivity implements InputDialogFragm
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    InputDialogFragment fragment = InputDialogFragment.newInstance(title, message,menCall, masiCall,callType);
+                    InputDialogFragment fragment = InputDialogFragment.newInstance(title, message, menCall, masiCall, callType);
                     fragment.show(getSupportFragmentManager(), "input_dialog");
                 }
             });
@@ -47,34 +47,40 @@ public class InputActivity extends AppCompatActivity implements InputDialogFragm
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InputActivity.this, TrainingActivity.class);
-                intent.putExtra("callList",callList);
+                intent.putExtra("callList", callList);
                 startActivity(intent);
             }
         });
     }
 
     @Override
-    public void onPositiveClick(int call, String callItem) {
+    public void onPositiveClick(int call, String callItem,int position) {
         String callType;
+        String topping;
         switch (call) {
             case 0:
                 callType = "men";
+                topping = menCall[position];
                 break;
             case 1:
                 callType = "yasai";
+                topping = masiCall[position];
                 break;
             case 2:
                 callType = "abura";
+                topping = masiCall[position];
                 break;
             case 3:
                 callType = "garlic";
+                topping = masiCall[position];
                 break;
             default:
                 callType = "men";
+                topping = masiCall[position];
                 break;
         }
-        callList.put(callType,callItem);
-
+        callList.put(callType, callItem);
+        buttons[call].setText(topping);
     }
 
     @Override
