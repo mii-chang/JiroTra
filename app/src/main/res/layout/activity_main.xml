@@ -8,18 +8,38 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/button_memory2"
+        android:layout_width="280dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFAA08"
+        android:text="今まで食べた二郎を見る"
+        android:textColor="#FFFFFF"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_memory"
+        app:layout_constraintVertical_bias="0.515" />
+
+    <Button
         android:id="@+id/button_memory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
+        android:layout_width="280dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="236dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="#FF7272"
         android:text="計算する"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
