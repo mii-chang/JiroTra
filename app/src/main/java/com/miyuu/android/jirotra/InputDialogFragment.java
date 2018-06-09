@@ -8,9 +8,10 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class InputDialogFragment extends DialogFragment {
     AlertDialog dialog;
@@ -66,13 +67,20 @@ public class InputDialogFragment extends DialogFragment {
                 break;
         }
 
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i =0;i<callList.length;i++){
+            arrayList.add(callList[i]);
+        }
+
 
         View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_input, null);
         Button positiveButton = dialogView.findViewById(R.id.positive_button);
         Button negativeButton = dialogView.findViewById(R.id.negative_button);
 
         ListView listView = dialogView.findViewById(R.id.listVIew);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_list_item_1, callList);
+        ListAdapter adapter = new ListAdapter(this.getActivity());
+        adapter.setList(arrayList);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(), R.layout.item_input, callList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
