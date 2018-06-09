@@ -19,7 +19,7 @@
         android:background="#FF7272"
         android:text="記録する"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
